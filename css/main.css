@@ -1,0 +1,362 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    --baseline: 0;
+    --pad-left: 0;
+    --pad-right: 0;
+    --pad-top: 0;
+    --pad-bottom: 0;
+    --column-width: 0;
+    --row-height: 0;
+    --gutter: 0;
+    --row-gap: 0;
+}
+
+.app {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #efeff0;
+}
+
+.drawer {
+    width: 100%;
+    padding: 1rem;
+    height: 16rem;
+    box-shadow: 0 4px 30px rgb(0 0 0 / 5%);
+    max-width: 986px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    background-color: #fff;
+}
+
+@media (max-width: 768px) {
+    .app {
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .drawer {
+        height: 600px;
+        min-width: 250px;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    [class*='col-'] {
+        width: 100% !important;
+    }
+
+    .divider::after {
+        top: 100% !important;
+        height: 1px !important;
+        width: 80% !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+    }
+}
+
+.divider {
+    position: relative;
+}
+
+.divider::after {
+    position: absolute;
+    content: '';
+    display: block;
+    width: 1px;
+    background-color: #ccc;
+    height: 80%;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.col-25 {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+}
+
+.col-50 {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.col-75 {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+}
+
+.col-100 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.item-center {
+    align-items: center;
+}
+
+.p-1 {
+    padding: 1rem;
+}
+
+input {
+    /* max-height: 1.5rem; */
+    outline: none;
+    border: none;
+    font-size: 2.5rem;
+    width: 100%;
+    user-select: none;
+    transition: color 0.2s ease;
+}
+
+input:hover {
+    color: #08a4ff;
+}
+
+input[data-input='width'],
+input[data-input='gutter'],
+input[data-input='columnCount'],
+input[data-input='paddingLeft'],
+input[data-input='paddingRight'] {
+    cursor: ew-resize;
+}
+
+input[data-input='height'],
+input[data-input='rowsCount'],
+input[data-input='rowGap'],
+input[data-input='baseline'],
+input[data-input='paddingTop'],
+input[data-input='paddingBottom'] {
+    cursor: ns-resize;
+}
+
+input.error {
+    color: #ff3333;
+}
+
+.grid-wrapper {
+    /* min-width: 400px; */
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid {
+    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.lines-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.drawer .block {
+    width: calc(100% / 3);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 1rem;
+}
+
+#paddings {
+    flex-direction: row;
+}
+
+#paddings .block {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 1rem;
+}
+
+#settings .block {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+#settings .block .col {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    position: relative;
+    display: block;
+}
+
+.input-wrap {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 0.5rem;
+}
+
+.input-wrap .input-value {
+    font-size: 2rem;
+}
+
+.lines-container > .block {
+    width: 100%;
+    min-height: var(--baseline);
+    position: relative;
+}
+
+.label {
+    font-size: 18px;
+    width: 24px;
+}
+
+.lines-container > .block::after {
+    position: absolute;
+    display: block;
+    content: '';
+    background-color: #ccc;
+    width: 100%;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+}
+
+.blocks-container {
+    padding-left: var(--pad-left);
+    padding-right: var(--pad-right);
+    padding-top: var(--pad-top);
+    padding-bottom: var(--pad-bottom);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    gap: var(--gutter);
+}
+
+.preview-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.preview-container > * {
+    position: absolute;
+    display: block;
+    background-color: #08a4ff;
+    opacity: 0;
+}
+
+.preview-container > .show {
+    opacity: 0.15;
+}
+
+.preview-container .left {
+    left: 0;
+    top: 0;
+    width: var(--pad-left);
+    height: 100%;
+}
+.preview-container .right {
+    right: 0;
+    top: 0;
+    width: var(--pad-right);
+    height: 100%;
+}
+.preview-container .top {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: var(--pad-top);
+}
+.preview-container .bottom {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: var(--pad-bottom);
+}
+
+.blocks-container > .column {
+    height: 100%;
+    min-width: var(--column-width);
+    /* background-color: #ff000038; */
+    display: flex;
+    flex-direction: column;
+    gap: var(--row-gap);
+}
+
+.blocks-container > .column > .row {
+    min-height: var(--row-height);
+    width: 100%;
+    background-color: #ff000038;
+}
+
+.blocks-container > .column.no-gap:nth-child(odd) > .row {
+    background-color: #ff000050;
+}
+
+.blocks-container > .column > .row.no-gap:nth-child(even) {
+    background-color: #ff000050;
+}
+
+.blocks-container
+    > .column.no-gap:nth-child(odd)
+    > .row.no-gap:nth-child(even) {
+    background-color: #ff000038;
+}
+
+.debug {
+    width: 100%;
+    height: 100%;
+    /* background-color: #ff000050; */
+}
